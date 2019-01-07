@@ -12,6 +12,8 @@ RUN apt-get -y upgrade
 
 RUN apt-get install -y -u apache2 nginx memcached mysql-server php5 php5-mysql php-pear nodejs upstart npm php5-mcrypt openssh-client expect
 
+RUN apt-get install -y unzip
+
 RUN npm config set strict-ssl false
 
 RUN npm install -g npm@2.15.11
