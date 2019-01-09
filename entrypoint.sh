@@ -5,6 +5,12 @@ cp -f /opt/conf/apache2/*.conf /etc/apache2/sites-available/
 cp -f /opt/conf/apache2/conf-available/*.conf /etc/apache2/conf-available/
 cp -f /opt/conf/custom.ini /var/www/stalker_portal/server/
 
+if [ -n ${TZ} ]; then
+ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+fi
+
+#grep mysql_pass /var/www/stalker_portal/server/custom.ini|awk -F'=' '{print $2}'|sed -e 's/^[ \t]*//'
+
 if [ $(ls /var/lib/mysql|wc -l) -eq 0 ]
 then
  echo "Copy default DB schema to /var/lib/mysql"
