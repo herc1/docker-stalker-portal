@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "If you are using external DB please do the following inside the container (docker exec -it stalker-portal bash):"
-echo "1. If the DB contents do not match the version of the container - run: cd /var/www/stalker_portal/deploy/ && phing"
-echo "2. Load the TZ info once: mysql_tzinfo_to_sql /usr/share/zoneinfo 2>/dev/null | mysql -u root -p mysql -h DB_HOST"
+echo "1. If the DB contents do not match the version of the container - run: docker exec -it stalker-portal sh -c 'cd /var/www/stalker_portal/deploy/ && phing'"
+echo "2. Load the TZ info once: docker exec -it stalker-portal sh -c 'mysql_tzinfo_to_sql /usr/share/zoneinfo 2>/dev/null | /usr/bin/mysql -u root -p mysql -h DB_HOST"
 echo "3. On the external DB set max_allowed_packet = 32M in /etc/mysql/my.cnf"
 
 cp -f /opt/conf/nginx/*.conf /etc/nginx/conf.d/
