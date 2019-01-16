@@ -6,11 +6,11 @@ ENV stalker_zip stalker_portal-5.2.0.zip
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
-RUN apt-get update 
+RUN apt-get -y update 
 
 RUN apt-get -y upgrade
 
-RUN apt-get install -y -u apache2 nginx memcached mysql-server php5 php5-mysql php-pear nodejs upstart npm php5-mcrypt openssh-client expect
+RUN apt-get install -y -u apache2 nginx memcached mysql-server php5 php5-mysql php-pear nodejs upstart npm php5-mcrypt openssh-client expect mysql-client
 
 RUN apt-get install -y unzip
 
