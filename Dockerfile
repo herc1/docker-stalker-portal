@@ -62,8 +62,6 @@ RUN service mysql start && service memcached start && cd /var/www/stalker_portal
 
 RUN mkdir /root/mysql_default && cp -rf /var/lib/mysql/* /root/mysql_default/
 
-RUN mkdir /root/www && cp -rf /var/www/* /root/www/
-
 COPY conf/nginx/*.conf /etc/nginx/conf.d/
 
 COPY conf/apache2/*.conf /etc/apache2/sites-available/

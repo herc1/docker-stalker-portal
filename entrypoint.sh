@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "If you are using external DB please do the following inside the container (docker exec -it stalker-portal bash):"
+echo "1. If the DB contents do not match the version of the container - run: cd /var/www/stalker_portal/deploy/ && phing"
+echo "2. Load the TZ info once: mysql_tzinfo_to_sql /usr/share/zoneinfo 2>/dev/null | mysql -u root -p mysql -h DB_HOST"
+echo "3. On the external DB set max_allowed_packet = 32M in /etc/mysql/my.cnf"
+
 cp -f /opt/conf/nginx/*.conf /etc/nginx/conf.d/
 cp -f /opt/conf/apache2/*.conf /etc/apache2/sites-available/
 cp -f /opt/conf/apache2/conf-available/*.conf /etc/apache2/conf-available/
@@ -8,8 +13,6 @@ cp -f /opt/conf/custom.ini /var/www/stalker_portal/server/
 if [ -n ${TZ} ]; then
  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 fi
-
-#grep mysql_pass /var/www/stalker_portal/server/custom.ini|awk -F'=' '{print $2}'|sed -e 's/^[ \t]*//'
 
 if [ $(ls /var/lib/mysql|wc -l) -eq 0 ]
 then
@@ -27,12 +30,6 @@ then
  mysql -u stalker -p1 -e 'create database stalker_db;'
  mysql -u stalker -p1 stalker_db < $sqldump
  rm -f $sqldump
-fi
-
-if [ $(ls /var/www | wc -l) -eq 0 ]
-then
- echo "/var/www is empty. Filling."
- cp -rf /root/www/* /var/www/
 fi
 
 services=(mysql memcached cron apache2 nginx)
