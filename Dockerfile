@@ -40,7 +40,7 @@ RUN a2enmod remoteip
 
 RUN service mysql start && mysql -u root -e "GRANT ALL PRIVILEGES ON stalker_db.* TO stalker@localhost IDENTIFIED BY '1' WITH GRANT OPTION;" && mysql -u root -e "GRANT ALL PRIVILEGES ON stalker_db.* TO root@localhost IDENTIFIED BY '1' WITH GRANT OPTION;"
 
-RUN for i in ru_RU.utf8 en_GB.utf8 uk_UA.utf8 pl_PL.utf8 el_GR.utf8 nl_NL.utf8 it_IT.utf8 de_DE.utf8 sk_SK.utf8 es_ES.utf8 bg_BG.utf8; do locale-gen $i; done
+RUN for i in ru_RU.utf8 en_GB.utf8 uk_UA.utf8 pl_PL.utf8 el_GR.utf8 nl_NL.utf8 it_IT.utf8 de_DE.utf8 sk_SK.utf8 es_ES.utf8 bg_BG.utf8 en_IE.utf8; do locale-gen $i; done
 
 COPY ${stalker_zip} /
 
