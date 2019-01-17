@@ -58,7 +58,7 @@ COPY index.html /var/www/
 
 COPY locale/* /var/www/stalker_portal/server/locale/
 
-RUN service mysql start && service memcached start && cd /var/www/stalker_portal/deploy/ && expect -c 'set timeout 900; spawn phing; expect "Enter password:"; send "1\r"; expect eof;'
+RUN service mysql start && service memcached start && cd /var/www/stalker_portal/deploy/ && expect -c 'set timeout 9000; spawn phing; expect "Enter password:"; send "1\r"; expect eof;'
 
 RUN mkdir /root/mysql_default && cp -rf /var/lib/mysql/* /root/mysql_default/
 
