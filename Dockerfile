@@ -42,6 +42,8 @@ RUN service mysql start && mysql -u root -e "GRANT ALL PRIVILEGES ON stalker_db.
 
 RUN for i in ru_RU.utf8 en_GB.utf8 uk_UA.utf8 pl_PL.utf8 el_GR.utf8 nl_NL.utf8 it_IT.utf8 de_DE.utf8 sk_SK.utf8 es_ES.utf8 bg_BG.utf8 en_IE.utf8; do locale-gen $i; done
 
+RUN dpkg-reconfigure locales
+
 COPY ${stalker_zip} /
 
 RUN unzip ${stalker_zip} -d stalker_portal
@@ -56,7 +58,7 @@ RUN echo ${stalker_version} > stalker_version
 
 COPY index.html /var/www/
 
-COPY locale/* /var/www/stalker_portal/server/locale/
+COPY locale/ /var/www/stalker_portal/server/locale/
 
 RUN service mysql start && service memcached start && cd /var/www/stalker_portal/deploy/ && expect -c 'set timeout 9000; spawn phing; expect "Enter password:"; send "1\r"; expect eof;'
 
