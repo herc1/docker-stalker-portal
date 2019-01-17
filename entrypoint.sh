@@ -11,7 +11,10 @@ cp -f /opt/conf/apache2/conf-available/*.conf /etc/apache2/conf-available/
 cp -f /opt/conf/custom.ini /var/www/stalker_portal/server/
 
 if [ -n ${TZ} ]; then
- ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+ echo $TZ > /etc/timezone
+ rm -rf /etc/localtime
+ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+ dpkg-reconfigure -f noninteractive tzdata
 fi
 
 if [ $(ls /var/lib/mysql|wc -l) -eq 0 ]
