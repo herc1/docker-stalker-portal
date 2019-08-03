@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
 
-ENV stalker_version 520
+ENV stalker_version 550
 
-ENV stalker_zip stalker_portal-5.2.0.zip
+ENV stalker_zip ministra-5.5.0.zip
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
